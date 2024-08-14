@@ -1,0 +1,74 @@
+pipeline{
+    agent any
+
+    environment {
+        APP_NAME = "image_name"
+        RELEASE = "latest"
+        DOCKER_USER = "fir3eye"
+        DOCKER_PASS = 'dockerhub'
+        IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
+        IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}" 
+    }
+    stages{
+        stage("Cleanup Workspace"){
+            steps{
+                cleanWs()
+            }
+        }
+        stage("Checkout from SCM"){
+            steps{
+                git branch: 'main', credentialsId: 'github', url: 'https://github.com/Fir3eye/pr_01_docker_push_img.git'
+            }
+        }
+        stage("Build Docker Image"){
+            steps{
+                script {
+                    docker.withRegistry('',DOCKER_PASS) {
+                        docker_image = docker.build "${IMAGE_NAME}"
+                    }
+                }
+            }
+        }
+        stage("Trivy Scan") {
+            steps {
+                script {
+                    sh "trivy image ${docker_image.id} > trivy.txt"
+                }
+            }
+        }
+        stage("Push Docker Image"){
+            steps{
+                script {
+                    docker.withRegistry('',DOCKER_PASS){
+                        docker_image.push("${IMAGE_TAG}")
+                        docker_image.push('latest')
+                    }
+                }
+            }
+        }
+
+        stage ('Cleanup Artifacts') {
+            steps {
+                script {
+                    sh "docker rmi ${IMAGE_NAME}:${IMAGE_TAG}"
+                    sh "docker rmi ${IMAGE_NAME}:latest"
+                }
+            }
+        }
+        stage("Sonarqube Analysis") {
+            steps {
+                script {
+                    withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') {
+                        sh "mvn sonar:sonar"
+                    }
+                }
+            }
+        }
+        stage("Quality Gate") {
+            steps {
+                waitForQualityGate abortPipeline: false, credentialsId: 'Sonar-token' 
+
+            }
+        }
+    }
+}

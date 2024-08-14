@@ -1,0 +1,24 @@
+pipeline {
+    agent any 
+    tools {
+        jdk 'jdk11'
+        maven 'maven3'
+    }
+    stages{
+        stage("Clean WorkSpace"){
+            steps {
+                cleanWs()
+            }
+        }
+        stage("Checkout SCM"){
+            steps {
+                git 'https://github.com/Fir3eye/pr_03_amazon-eks-jenkins-terraform.git'
+            }
+        }
+        stage("Maven Compile"){
+            steps {
+                sh 'mvn clean compile'
+            }
+        }
+    }
+}
