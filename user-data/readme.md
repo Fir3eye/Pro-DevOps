@@ -19,6 +19,8 @@ sudo apt-get install docker.io -y
 sudo usermod -aG docker ubuntu  
 newgrp docker
 sudo chmod 777 /var/run/docker.sock
+
+# Sonarqube install on docker
 docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
 
 # install trivy
@@ -46,3 +48,4 @@ curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip
 sudo apt-get install unzip -y
 unzip awscliv2.zip
 sudo ./aws/install
+
