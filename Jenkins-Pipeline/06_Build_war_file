@@ -5,42 +5,6 @@ pipeline {
         maven 'maven3'
     }
     stages{
-        stage("Clean WorkSpace"){
-            steps {
-                cleanWs()
-            }
-        }
-        stage("Checkout SCM"){
-            steps {
-                git 'https://github.com/Fir3eye/pr_03_amazon-eks-jenkins-terraform.git'
-            }
-        }
-        stage("Maven Compile"){
-            steps {
-                sh 'mvn clean compile'
-            }
-        }
-        stage("SonarQube Analysis"){
-            steps{
-                script{
-                    withSonarQubeEnv(credentialsId: 'sonar-token') {
-                        sh 'mvn sonar:sonar'
-                    }
-                }
-            }
-        }
-        stage("OWASP Dependency Check"){
-             steps{
-                 dependencyCheck additionalArguments: '--scan ./ --format HTML ', odcInstallation: 'DP-Check'
-                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
-             }
-        }
-        stage("Quality Gate") {
-            steps {
-                waitForQualityGate abortPipeline: false, credentialsId: 'Sonar-token' 
-
-            }
-        }
         stage ('Build war file'){
              steps{
                  sh 'mvn clean install package'
