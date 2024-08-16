@@ -1,0 +1,23 @@
+---
+- name: Install lighttpd web server
+  become: yes
+  apt:
+    name: lighttpd
+    state: latest
+    update_cache: yes
+
+- name: Generate configuration file
+  template:
+    src: myconfig.j2
+    dest: /etc/lighttpd/lighttpd.conf
+    owner: root
+    group: root
+    mode: '0644'
+  vars:
+    server_port: 9090
+
+- name: Start lighttpd service
+  become: yes
+  service:
+    name: lighttpd
+    state: started
