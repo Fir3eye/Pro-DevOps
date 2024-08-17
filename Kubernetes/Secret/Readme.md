@@ -1,10 +1,7 @@
 # Types of Secret
-    - Generic Secret
-    - Docker-Registry Secret
-    - TLS Secret
-🚩 Generic Secret: Store key-value pairs, like API keys or database credentials.
-🚩 Docker-Registry: Securely store Docker registry credentials to pull images.
-🚩 TLS Secret: Manage TLS certificates and private keys for secure communication.
+- 🚩 Generic Secret: Store key-value pairs, like API keys or database credentials.
+- 🚩 Docker-Registry: Securely store Docker registry credentials to pull images.
+- 🚩 TLS Secret: Manage TLS certificates and private keys for secure communication.
 
 # Create Secret Using Imperative Method
 ## Generic Secret
