@@ -48,8 +48,8 @@
     --docker-server=my-registry.example:5000
 ---
 
-## Attach Generic Secret on Pods
-### secret-1.yaml
+## Attach Docker-Registry Secret on Pods
+### secret-2.yaml
     apiVersion: v1
     kind: Pod
     metadata:
@@ -72,8 +72,8 @@
     --cert=/home/fir3/k8/secret/data/cacrt.pem \
     --key=/home/fir3/k8/secret/data/cakey.pem
 
-## Attach Generic Secret on Pods
-### secret-1.yaml
+## Attach TLS Secret on Pods
+### secret-3.yaml
     apiVersion: v1
     kind: Pod
     metadata:
