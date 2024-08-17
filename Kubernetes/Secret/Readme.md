@@ -61,7 +61,11 @@
         envFrom
         - secretRef:
             name: docker-secret
-
+### Commands
+    kubectl get secret
+    kubectl describe secret <secret-name>
+    kubectl get pods
+    kubectl exec -it <pod-name> -- printenv
 ---
 ## TLS Secret
     kubectl create secret tls my-tls-secret \
@@ -88,10 +92,9 @@
         secretName: my-tls-secret
 
 
-
-### Command
+### Commands
     kubectl get secret
-    kubectl describe secret my-tls-secret
+    kubectl describe secret <secret-name>
     kubectl get pods
-    kubectl exec -it <pod-name> -- printenv
+    kubectl exec -it <pod-name> -- bash
 
