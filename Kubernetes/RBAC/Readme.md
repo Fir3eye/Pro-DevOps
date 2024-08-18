@@ -33,6 +33,16 @@ Mastering these objects helps in securing and efficiently managing access to you
     name: pod-reader # name of role
     apiGroup: rbac.authorization.k8s.io
 
+## How to check
+    kubectl get role
+    kubectl get rolebinding
+    kubectl auth can-i get pod --as jack 
+
+- Ans will give in form of yes/no
+- yes --> you have get, watch and list permissions.
+- no --> you do not have get, watch, and list permissions.
+    
+
 ---
 
 ## ClusterRole
@@ -75,4 +85,13 @@ Mastering these objects helps in securing and efficiently managing access to you
     kind: ClusterRole
     name: secret-reader # name of cluster-role
     apiGroup: rbac.authorization.k8s.io
+
+## How to check
+    kubectl get clusterrole
+    kubectl get clusterrolebinding
+    kubectl auth can-i get secret --as sid -A 
+
+- A --> it will showing result of all ns 
+- yes --> you have get, watch and list permissions.
+- no --> you do not have get, watch, and list permissions.
 
