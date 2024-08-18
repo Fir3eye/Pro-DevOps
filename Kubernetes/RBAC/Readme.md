@@ -1,5 +1,5 @@
 # How to Use
--- Kubernetes RBAC (Role-Based Access Control) is crucial for managing who can do what within your cluster. It involves four key objects:
+### Kubernetes RBAC (Role-Based Access Control) is crucial for managing who can do what within your cluster. It involves four key objects:
 
 - Role: Defines permissions within a specific namespace.
 - Cluster Role: Like a Role, but applicable across the entire cluster.
