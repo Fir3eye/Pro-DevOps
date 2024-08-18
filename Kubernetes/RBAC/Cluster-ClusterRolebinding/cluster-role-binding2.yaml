@@ -1,0 +1,14 @@
+# for all ns
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: read-secret-global
+  #namespace: development # for specific ns
+subjects:
+- kind: User  # user/group/service account --> you can define 
+  name: sid
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: secret-reader # name of cluster-role
+  apiGroup: rbac.authorization.k8s.io
