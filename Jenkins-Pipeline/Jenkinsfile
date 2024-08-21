@@ -19,7 +19,7 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/Fir3eye/springboot-demo.git'
             }
         }
-        stage('Build') {
+        stage('Compile') {
             steps {
                 sh "mvn compile"
             }
@@ -46,7 +46,7 @@ pipeline {
                 }
             }
         }
-        stage('Package') {
+        stage('Build') {
             steps {
                 sh "mvn package"
             }
