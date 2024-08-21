@@ -9,7 +9,10 @@ pipeline {
             steps{
                 script{
                     withSonarQubeEnv(credentialsId: 'sonar-token') {
-                        sh 'mvn sonar:sonar'
+                        sh '''$SCANNER_HOME/bin/sonar-scanner \
+                                -Dsonar.projectName=Blogging-app \
+                                -Dsonar.projectKey=Blogging-app \
+                                -Dsonar.java.binaries=target'''
                     }
                 }
             }
