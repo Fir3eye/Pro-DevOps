@@ -63,7 +63,7 @@ eksctl create cluster \
 ## Step 2: Update Kubeconfig File
 
 ```
-aws eks update-kubeconfig --name test-cluster
+aws eks update-kubeconfig --name test-cluster-1
 ```
 
 ## Step 3: Set Up Kubernetes Metrics Server
