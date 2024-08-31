@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: springboot
+  template:
+    metadata:
+      labels:
+        app: springboot
+    spec:
+      containers:
+        - name: springboot
+          image: fir3eye/springboot1:latest
+
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "512m"
+            limits:
+              memory: "128Mi"
+              cpu: "512m"
+
+          ports:
+            - containerPort: 8080
+
+          readinessProbe:
+            httpGet:
+              path: /hello
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 10
+
+          livenessProbe:
+            httpGet:
+              path: /hello
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 10
+
+          startupProbe:
+            httpGet:
+              path: /hello
+              port: 8080
+            failureThreshold: 30
+            periodSeconds: 10
+
+          env:
+            - name: PORT
+              value: "8080"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: springboot
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 8080
+  selector:
+    app: springboot
