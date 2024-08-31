@@ -8,6 +8,43 @@ This guide will walk you through the steps to create a Kubernetes cluster on AWS
 - [EKSCTL](https://eksctl.io/)
 - [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 - [HELM](https://helm.sh/docs/intro/install/)
+## Installation and Configuration Guide for AWS CLI, Helm, and Kubectl
+### Download and Install AWS CLI
+```
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+```
+---
+### Configure AWS CLI
+```
+aws configure
+```
+You will be prompted to enter:
+- AWS Access Key ID
+- AWS Secret Access Key
+- Default region name (e.g., us-east-1)
+- Default output format (e.g., json)
+
+---
+### Install Kubectl 
+```
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+chmod +x kubectl
+sudo mv kubectl /usr/local/bin/
+```
+---
+### Download and Install Helm
+
+```
+curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+```
+### Verify helm version 
+```
+helm version
+```
+
+---
 
 ## Step 1: Create Kubernetes Cluster in AWS Using `eksctl`
 
