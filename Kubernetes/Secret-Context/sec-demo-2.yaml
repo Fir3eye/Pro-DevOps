@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: security-context-demo-2
+spec:
+  securityContext: # security context in pod level but if not define securityin container so this context would be implement
+    runAsUser: 1000
+  containers:
+  - name: sc-demo-2
+    image: busybox:1.28
+    command: ["sh","-c","sleep 1h"]
+    securityContext: # Container lavel security
+      runAsUser: 2000
