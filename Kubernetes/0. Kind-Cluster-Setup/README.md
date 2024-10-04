@@ -1,13 +1,13 @@
 # Installation Instructions:
 ## Install Docker:
 ```
-sudo apt install docker-ce
+sudo apt install docker.io
 ```
 ## Install kubectl:
 ```
-curl -LO "https://dl.k8s.io/release/$(curl -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-chmod +x ./kubectl
-sudo mv ./kubectl /usr/local/bin/kubectl
+sudo snap install kubectl --classic
+kubectl version --client
+Client Version: version.Info{Major:"1", Minor:"26", GitVersion:"v1.26.0", ...}
 ```
 
 ## Install kind:
