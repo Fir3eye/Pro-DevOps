@@ -6,7 +6,6 @@
 - Role Binding: Ties a Role to a user or group within a specific namespace.
 - Cluster Role Binding: Ties a Cluster Role to a user or group cluster-wide.
 Mastering these objects helps in securing and efficiently managing access to your Kubernetes resources! 💼
-
 ## Role
     apiVersion: rbac.authorization.k8s.io/v1
     kind: Role
